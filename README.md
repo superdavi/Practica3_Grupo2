@@ -1,181 +1,158 @@
 ## INTEGRANTES.
 | Nombre | Cargo | URL GitHub |
 |---|:---:|---:|
-| Daniel Alquinga | :technologist: Desarrollador | https://github.com/superdavi/Practica2_Grupo2 |
-| Daniel Baldeon | :technologist: Desarrollador | https://github.com/debpdhs/Practica2_Grupo2.git |
-| Bryan Miño | :technologist: Desarrollador | https://github.com/bmiomi/tarea2-grupo2.git |
-| Wilson Segovia | :technologist: Desarrollador | https://github.com/segoviawilson/Practica2_Grupo2.git |
-| Leonardo Tuguminago | :technologist: Desarrollador | https://github.com/Tuguminago/Practica2_Grupo2.git |
+| Daniel Alquinga | :technologist: Desarrollador | https://github.com/superdavi/Practica3_Grupo2 |
+| Daniel Baldeon | :technologist: Desarrollador | https://github.com/debpdhs/Practica3_Grupo2 |
+| Bryan Miño | :technologist: Desarrollador | https://github.com/bmiomi/tarea3-grupo2.git |
+| Wilson Segovia | :technologist: Desarrollador | https://github.com/segoviawilson/Practica3_Grupo2.git |
+| Leonardo Tuguminago | :technologist: Desarrollador | https://github.com/ltuguminago/fastapi-app.git |
 
-# 1. Despliegue de PGADMIN con docker compose utilizando imágenes diferentes a las de las prácticas
+# 1. Análisis de vulnerabilidades con docker scout mediante un flujo de github actions
 
-Este proyecto implementa el docker compose de una base de datos PostgreSQL y presenta su interfaz gráfica PGADMIN.
-
-## 1.1. Arquitectura del Sistema
-
-- **Postgres 15.6**: Base de datos PostgreSQL y su version 15.6
-- **PGAdmin 4.8.10**: Interfaz web para administración de la base de datos
-- **Volúmenes**: Gestionados por Docker y almacenados en ./data/postgres:/var/lib/postgresql/data y ./data/pgadmin:/var/lib/pgadmin
+Con base en el laboratorio de fastapi-app, deberan subir la imagen que le corresponde a su grupo y las aplicaciones a su repositorio de github. Construir la imagen, subir a docker hub y realizar el análisis de vulnerabilidades con docker scout mediante un flujo de github actions.
 
 # 2. Configuración e Instalación
 
 ### PASO 1: 📂 Estructura de Archivos
 
-```bash
-    tree -a
+<img width="222" height="185" alt="structura fastapi" src="https://github.com/user-attachments/assets/329d6d04-8b21-431d-94f7-4371d3b6726f" />
 
-    Proyecto PGAdmin
-    |
-    |____ .env
-    |____ README.md
-    |____ compose.yaml
+### PASO 2: Iniciar sessión en DockerHub y crear repositorio
+
+<img width="946" height="553" alt="Crear repositorio DockerHub" src="https://github.com/user-attachments/assets/e7c99a3e-eac1-4578-bf41-1e967b461561" />
+
+### PASO 3: En la termina, iniciar sessión con las credenciales de DockerHub
+
+```bash
+docker login -u debpdhs
 ```
 
 **Salida Esperada**
 
-<img width="886" height="213" alt="image" src="https://github.com/user-attachments/assets/30092990-b98f-4862-9a16-e63e90436568" />
+<img width="740" height="178" alt="Iniciar session en terminal DockerHub" src="https://github.com/user-attachments/assets/7824cd37-2cdc-4cb5-9ebd-3e16444f217a" />
 
-### PASO 2: Creación del directorio para guardar data portable
-
----
+### PASO 4: Construir imagen de Docker MultiStage
 
 ```bash
-mkdir -p data/postgres data/pgadmin
+docker build -t hello-multistage -f Dockerfile .
 ```
 
 **Salida Esperada**
 
-<img width="886" height="213" alt="image" src="https://github.com/user-attachments/assets/94ccd115-6d8b-4aee-b0b5-80aaa1fdca27" />
+<img width="1236" height="475" alt="Construccion imagen multi-stage" src="https://github.com/user-attachments/assets/ad7c3ee3-76ed-4a40-9680-2ec1ebc7c3e3" />
 
-**Explicación:**
-
-- Permite la portabilidad de datos en dockers de bases de datos
-    
-### PASO 3: Listar y ver directorios creados
+### PASO 5: Revisamos la imagen construida
 
 ```bash
-    tree -a
-
-    Proyecto PGAdmin
-    |
-    |____ compose.yaml
-    |____ data
-            |____ pgadmin
-            |____ postgres
-    |____ .env
-    |____ README.md
-```
-**Salida Esperada**
-
-<img width="725" height="443" alt="directorio" src="https://github.com/user-attachments/assets/9e45efc1-708f-47d5-87a2-1a2215eb4e75" />
-
-**Explicación:**
-
-- **Directorio**: Revisar el directorio creado y revisar los archivos que crearán el docker de PGAdmin
-
-### PASO 4: Dar permisos 777 a carpeta pgadmin y postgres
-
-```bash
-    sudo chmod 777 data/pgadmin
-    sudo chmod 777 data/postgres
+docker images
 ```
 
 **Salida Esperada**
 
-<img width="725" height="443" alt="permisos chmod" src="https://github.com/user-attachments/assets/d7e3c045-7748-4835-9d6e-55b2b396d78a" />
+<img width="547" height="58" alt="images" src="https://github.com/user-attachments/assets/827a6bb6-9f72-4c07-8099-1097059f74f0" />
 
-**Explicación:**
-
-- **Permisos requeridos**: Se debe dar permisos de escritura, lectura y ejecución a esta carpeta caso contrario no se ejecutará el docker porque necesita esos permisos para ejecutarse sin problema
-
-### PASO 5: Despliegue del Contenedor Docker PostgreSQL y PGAdmin
+### PASO 6: Tagear la imagen "usuario_DockerHub/repositorio"
 
 ```bash
-docker compose up -d
+docker tag hello-multistage:latest debpdhs/practica3_grupo2:v1
 ```
 
-### Paso 5.1. Salida Esperada
-
-<img width="676" height="597" alt="despliegue contendor" src="https://github.com/user-attachments/assets/c3dffb42-5f0a-45e6-9dbc-80f6ecdb2394" />
-
-**Explicación:**
-
-- **PGAdmin Container**: Proporciona interfaz web conectada al contenedor PostgreSQL
-- **Ports**: PostgreSQL en puerto 5432, PGAdmin en puerto 8080
-  
-### Paso 5.2. Verificar Estado Up del Contendor
-
-```bash
-docker ps -a
-```
-
-<img width="1275" height="705" alt="listar los contendores" src="https://github.com/user-attachments/assets/5495871a-0490-47da-9926-addd2e48825e" />
-
-### PASO 6: Ingreso al Portal del Servidor PGAdmin
-
-```bash
-http://localhost:8080
-```
-<img width="1275" height="705" alt="listar los contendores" src="https://github.com/user-attachments/assets/21b4ab97-51b8-48c0-9f07-68fff205b5bf" />
-
-### PASO 7: Credenciales de Ingreso
-
-
-```bash
-usuario: grupo2.mdmq@gmail.com
-password: DV353rhfU3
-```
 **Salida Esperada**
 
-<img width="1275" height="705" alt="ingresar pgadmin" src="https://github.com/user-attachments/assets/a7ce96cd-fec1-44a3-9ea2-03253bb58bc7" />
+<img width="812" height="176" alt="Tager imagen" src="https://github.com/user-attachments/assets/d34cbabc-f693-4cf3-8b10-f02f3656c7e8" />
 
-### PASO 8: Despliegue de PGAdmin
-
-<img width="1275" height="705" alt="despliegue" src="https://github.com/user-attachments/assets/668c5124-8840-4d01-be98-ad2da48c6ef7" />
-
-### PASO 9  
-
-### Configuración Adicional
-
-
-
-**Archivo .env**
-
-```env
-POSTGRES_USER=grupo2
-POSTGRES_PW=P5xi9i2n8l
-POSTGRES_DB=dbGrupo2
-PGADMIN_MAIL=grupo2.mdmq@gmail.com
-PGADMIN_PW=DV353rhfU3
-```
-
-### Comandos Útiles
+### PASO 7: Subir imagen al DockerHub
 
 ```bash
-# Ver contenedores en ejecución
-docker ps
-
-# Ver logs de un contenedor
-docker logs postgres_db
-
-# Detener todos los contenedores
-docker stop postgres_db pgadmin4
-
-# Eliminar contenedores
-docker rm postgres_db pgadmin4
-
+docker push debpdhs/practica3_grupo2:v1
 ```
+
+**Salida Esperada**
+
+<img width="786" height="231" alt="subir imagen al dockerHub" src="https://github.com/user-attachments/assets/5c8ef21b-498d-4db8-99fb-335682a2f519" />
+
+### PASO 8: Revizar la imagen subida en el repositorio de DockerHub
+
+<img width="924" height="681" alt="revisamos imagen subida en el dockerhub" src="https://github.com/user-attachments/assets/bb095bc5-71a9-4f64-ac28-3efd485e064a" />
+
+### PASO 9: Iniciar sessión en GitHub y crear repositorio
+
+<img width="909" height="791" alt="Crear repositorio GitHub" src="https://github.com/user-attachments/assets/cae5c798-a1a8-4bd0-a82c-c45e44247b0b" />
+
+### PASO 10: El repositorio debe contener los siguientes archivos
+
+<img width="222" height="185" alt="structura fastapi" src="https://github.com/user-attachments/assets/74615d19-56fb-4484-80b7-04aeeeeb541d" />
+
+### PASO 11: Ingresar al siguiente directorio
+
+- Setting/secrets and variables/Actions
+
+### PASO 12. Crear las variables con las credenciales deL DockerHub
+
+```bash
+DOCKERHUB_USERNAME
+DOCKERHUB_TOKEN
+```
+
+**Salida Esperada**
+
+<img width="1197" height="774" alt="secrets and varibles" src="https://github.com/user-attachments/assets/591ee230-2168-410b-a152-78514c5e7df6" />
+
+### PASO 13: Ingresar al siguiente directorio
+
+- Action/Docker image/ Configure
+
+**Salida Esperada**
+
+<img width="1170" height="558" alt="Docker images configure" src="https://github.com/user-attachments/assets/5517d68b-5aae-416e-ac3e-4457281e8391" />
+
+
+### PASO 14: Reemplazar el contenido del workflows actual por el contenido del archivo fastapi.ylm
+
+- Modificar el parametro IMAGE_NAME con el usuario del DockerHub + el nombre del repositorio.
+
+```bash
+IMAGE_NAME: debpdhs/practica3_grupo2
+```
+
+- Modificar el parametro push con el valor de true, para que la imagen suba al DockerHub
+
+```bash
+push: true
+```
+
+- Guardar el archivo con el nombre "scout.yml"
+
+<img width="893" height="1070" alt="workflows" src="https://github.com/user-attachments/assets/966c2d9f-aa3f-401b-b0d4-21458227c80b" />
+
+### PASO 15: Ingresar al siguiente directorio "Action", para ver ejecutandose el workflows.
+
+<img width="1221" height="488" alt="Captura de pantalla de 2025-09-21 14-29-17" src="ttps://github.com/user-attachments/assets/6470685e-cff3-484a-8156-e32f4a42f361" />
+
+### PASO 16: Ingresar al build-and-analyze
+
+<img width="1214" height="1210" alt="Captura de pantalla de 2025-09-21 14-30-30" src="https://github.com/user-attachments/assets/2ac2d133-254e-4106-8581-f6a631171ae4" />
+
+### PASO 17: Terminada la ejecución workflows, finalmente se puede revisar el reporte docker-scout-report, descargando el archivo.
+
+<img width="878" height="1159" alt="Captura de pantalla de 2025-09-21 14-31-30" src="https://github.com/user-attachments/assets/3ed1c78a-5493-4b83-998a-7a8bf6f43138" />
+
+## PASO 18. Visualizar el reporte
+
+<img width="664" height="183" alt="Captura de pantalla de 2025-09-21 14-32-17" src="https://github.com/user-attachments/assets/8297cf96-6ce2-44e4-b294-4dcbb2b1e556" />
+
+## PASO 19. Revisar en DockerHub, la imagen subida.
+
+<img width="962" height="744" alt="Captura de pantalla de 2025-09-21 14-46-32" src="https://github.com/user-attachments/assets/6a3233c8-b6dd-4c36-a5aa-3e17cf659080" />
 
 
 # 3. Conclusiones
 
-- Implementación Exitosa: Se logró configurar un sistema distribuido utilizando Docker, separando la base de datos (PostgreSQL) de la interfaz de administración (PGAdmin) en contenedores independientes.
-- Uso de Docker Compose: Creacion de un solo archivo donde se incluyen todas las sentencias para la creación de uno o más docker con sus configuraciones .
-- Separación de Configuración: El archivo .env, centraliza las variables sensibles, mejorando la seguridad y facilitando el despliegue en diferentes ambientes.
+- La implementación de Docker Scout dentro de GitHub Actions permite automatizar completamente el análisis de vulnerabilidades en imágenes Docker, integrando la seguridad directamente en el pipeline de CI/CD.
 
-# 4. Recomendaciones
+- Al ejecutar el análisis en cada push al repositorio, se identifica proactivamente vulnerabilidades en etapas tempranas del desarrollo, reduciendo riesgos de seguridad en producción.
 
- - Es importante verificar los permisos de las carpetas ya que estas muchas veces no cuentan con permisos de lectura, escritura y ejecución, por lo que hay que darles permisos con los comandos CHMOD y las variables del 777.
- - Revisar los puertos habilitados para la ejecución del contenedor, evitando conflictos al momento del despliegue.
- - Se utilizaron volumnenes para hacerle portable el contenedor debido a que Bind Mount no permite portabilidad.
- - Con Docker Compose puedes levantar, administrar y escalar múltiples contenedores con un solo archivo (docker-compose.yml), en lugar de ejecutar manualmente docker run para cada servicio.
+- Docker Scout proporciona visibilidad completa sobre las vulnerabilidades en todas las capas de la imagen, facilitando la identificación de dependencias problemáticas en la aplicación FastAPI.
+
+- GitHub Actions proporciona registros detallados de cada ejecución, creando un historial auditable de los estados de seguridad de la aplicación a lo largo del tiempo.
+
