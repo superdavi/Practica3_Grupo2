@@ -38,8 +38,8 @@ docker build -t hello-multistage -f Dockerfile .
 ```
 
 **Salida Esperada**
+<img width="1236" height="475" alt="image" src="https://github.com/user-attachments/assets/12289e30-1fd2-48b8-a368-9c7f48baacda" />
 
-<img width="1236" height="475" alt="Construccion imagen multi-stage" src="https://github.com/user-attachments/assets/ad7c3ee3-76ed-4a40-9680-2ec1ebc7c3e3" />
 
 ### PASO 5: Revisamos la imagen construida
 
@@ -49,39 +49,43 @@ docker images
 
 **Salida Esperada**
 
-<img width="547" height="58" alt="images" src="https://github.com/user-attachments/assets/827a6bb6-9f72-4c07-8099-1097059f74f0" />
+<img width="547" height="58" alt="image" src="https://github.com/user-attachments/assets/79c352b1-d8fc-4455-b31e-ef16e3d525a8" />
 
 ### PASO 6: Tagear la imagen "usuario_DockerHub/repositorio"
 
 ```bash
-docker tag hello-multistage:latest debpdhs/practica3_grupo2:v1
+docker tag hello-multistage:latest superdavi1411/practica3_grupo2:v1
 ```
 
 **Salida Esperada**
 
-<img width="812" height="176" alt="Tager imagen" src="https://github.com/user-attachments/assets/d34cbabc-f693-4cf3-8b10-f02f3656c7e8" />
+<img width="812" height="176" alt="image" src="https://github.com/user-attachments/assets/284505d8-87a6-487d-b890-7599eaca1c91" />
 
 ### PASO 7: Subir imagen al DockerHub
 
 ```bash
-docker push debpdhs/practica3_grupo2:v1
+docker push superdavi1411/practica3_grupo2:v1
 ```
 
 **Salida Esperada**
 
-<img width="786" height="231" alt="subir imagen al dockerHub" src="https://github.com/user-attachments/assets/5c8ef21b-498d-4db8-99fb-335682a2f519" />
+<img width="786" height="231" alt="image" src="https://github.com/user-attachments/assets/98ab9aee-b7f5-48dc-a709-ed159fb4ce62" />
+
 
 ### PASO 8: Revizar la imagen subida en el repositorio de DockerHub
 
-<img width="924" height="681" alt="revisamos imagen subida en el dockerhub" src="https://github.com/user-attachments/assets/bb095bc5-71a9-4f64-ac28-3efd485e064a" />
+<img width="924" height="681" alt="image" src="https://github.com/user-attachments/assets/cfe5c640-edb4-4e28-9739-3132511f68b1" />
+
 
 ### PASO 9: Iniciar sessión en GitHub y crear repositorio
 
-<img width="909" height="791" alt="Crear repositorio GitHub" src="https://github.com/user-attachments/assets/cae5c798-a1a8-4bd0-a82c-c45e44247b0b" />
+<img width="909" height="791" alt="image" src="https://github.com/user-attachments/assets/d143e82f-6a24-4d1d-a448-18fedf3665cc" />
+
 
 ### PASO 10: El repositorio debe contener los siguientes archivos
 
-<img width="222" height="185" alt="structura fastapi" src="https://github.com/user-attachments/assets/74615d19-56fb-4484-80b7-04aeeeeb541d" />
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/4427738b-5b7c-4147-aece-ac5cffcc356e" />
+
 
 ### PASO 11: Ingresar al siguiente directorio
 
@@ -96,7 +100,7 @@ DOCKERHUB_TOKEN
 
 **Salida Esperada**
 
-<img width="1197" height="774" alt="secrets and varibles" src="https://github.com/user-attachments/assets/591ee230-2168-410b-a152-78514c5e7df6" />
+<img width="1197" height="774" alt="image" src="https://github.com/user-attachments/assets/451f48ba-1860-410e-b9eb-b897d75cd48b" />
 
 ### PASO 13: Ingresar al siguiente directorio
 
@@ -112,7 +116,7 @@ DOCKERHUB_TOKEN
 - Modificar el parametro IMAGE_NAME con el usuario del DockerHub + el nombre del repositorio.
 
 ```bash
-IMAGE_NAME: debpdhs/practica3_grupo2
+IMAGE_NAME: superdavi1411/scout
 ```
 
 - Modificar el parametro push con el valor de true, para que la imagen suba al DockerHub
@@ -123,27 +127,25 @@ push: true
 
 - Guardar el archivo con el nombre "scout.yml"
 
-<img width="893" height="1070" alt="workflows" src="https://github.com/user-attachments/assets/966c2d9f-aa3f-401b-b0d4-21458227c80b" />
+<img width="893" height="1070" alt="image" src="https://github.com/user-attachments/assets/189be8f3-6327-4816-b286-80244cd4ffe3" />
+
 
 ### PASO 15: Ingresar al siguiente directorio "Action", para ver ejecutandose el workflows.
 
-<img width="1221" height="488" alt="Captura de pantalla de 2025-09-21 14-29-17" src="ttps://github.com/user-attachments/assets/6470685e-cff3-484a-8156-e32f4a42f361" />
+<img width="1221" height="488" alt="image" src="https://github.com/user-attachments/assets/34656676-b154-4188-8515-594b93f50846" />
 
-### PASO 16: Ingresar al build-and-analyze
 
-<img width="1214" height="1210" alt="Captura de pantalla de 2025-09-21 14-30-30" src="https://github.com/user-attachments/assets/2ac2d133-254e-4106-8581-f6a631171ae4" />
-
-### PASO 17: Terminada la ejecución workflows, finalmente se puede revisar el reporte docker-scout-report, descargando el archivo.
+### PASO 16: Terminada la ejecución workflows, finalmente se puede revisar el reporte docker-scout-report, descargando el archivo.
 
 <img width="878" height="1159" alt="Captura de pantalla de 2025-09-21 14-31-30" src="https://github.com/user-attachments/assets/3ed1c78a-5493-4b83-998a-7a8bf6f43138" />
 
-## PASO 18. Visualizar el reporte
+## PASO 17. Visualizar el reporte
 
 <img width="664" height="183" alt="Captura de pantalla de 2025-09-21 14-32-17" src="https://github.com/user-attachments/assets/8297cf96-6ce2-44e4-b294-4dcbb2b1e556" />
 
-## PASO 19. Revisar en DockerHub, la imagen subida.
+## PASO 18. Revisar en DockerHub, la imagen subida.
 
-<img width="962" height="744" alt="Captura de pantalla de 2025-09-21 14-46-32" src="https://github.com/user-attachments/assets/6a3233c8-b6dd-4c36-a5aa-3e17cf659080" />
+<img width="962" height="744" alt="image" src="https://github.com/user-attachments/assets/c5000233-6051-4852-964a-ae173248c31b" />
 
 
 # 3. Conclusiones
