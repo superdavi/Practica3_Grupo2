@@ -19,17 +19,17 @@ Con base en el laboratorio de fastapi-app, deberan subir la imagen que le corres
 
 ### PASO 2: Iniciar sessión en DockerHub y crear repositorio
 
-<img width="946" height="553" alt="Crear repositorio DockerHub" src="https://github.com/user-attachments/assets/e7c99a3e-eac1-4578-bf41-1e967b461561" />
+<img width="946" height="553" alt="image" src="https://github.com/user-attachments/assets/0f049ae2-e32c-49d4-91e7-c479ef70d618" />
 
 ### PASO 3: En la termina, iniciar sessión con las credenciales de DockerHub
 
 ```bash
-docker login -u debpdhs
+docker login -u superdavi1411
 ```
 
 **Salida Esperada**
 
-<img width="740" height="178" alt="Iniciar session en terminal DockerHub" src="https://github.com/user-attachments/assets/7824cd37-2cdc-4cb5-9ebd-3e16444f217a" />
+<img width="740" height="178" alt="image" src="https://github.com/user-attachments/assets/9bd04a9b-045d-45b5-8ea6-b2ca90f1495b" />
 
 ### PASO 4: Construir imagen de Docker MultiStage
 
