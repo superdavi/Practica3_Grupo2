@@ -137,7 +137,8 @@ push: true
 
 ### PASO 16: Terminada la ejecución workflows, finalmente se puede revisar el reporte docker-scout-report, descargando el archivo.
 
-<img width="878" height="1159" alt="Captura de pantalla de 2025-09-21 14-31-30" src="https://github.com/user-attachments/assets/3ed1c78a-5493-4b83-998a-7a8bf6f43138" />
+<img width="878" height="1159" alt="image" src="https://github.com/user-attachments/assets/7077a1eb-b303-4474-9ffc-535543d81dcd" />
+
 
 ## PASO 17. Visualizar el reporte
 
